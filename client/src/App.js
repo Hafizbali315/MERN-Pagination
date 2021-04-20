@@ -1,40 +1,40 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import { useState, useEffect } from 'react'
+import './App.css'
 
 // Components
-import Card from './components/Card';
-import Pagination from './components/Pagination';
+import Card from './components/Card'
+import Pagination from './components/Pagination'
 
 const App = ({ match }) => {
-	const pageNumber = match.params.pageNumber || 1;
+	const pageNumber = match.params.pageNumber || 1
 
-	const [posts, setPosts] = useState([]);
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(false);
+	const [posts, setPosts] = useState([])
+	const [loading, setLoading] = useState(false)
+	const [error, setError] = useState(false)
 
-	const [page, setPage] = useState(pageNumber);
-	const [pages, setPages] = useState(1);
+	const [page, setPage] = useState(pageNumber)
+	const [pages, setPages] = useState(1)
 
 	useEffect(() => {
 		const fecthPosts = async () => {
-			setLoading(true);
+			setLoading(true)
 			try {
-				const res = await fetch(`/api/posts?page=${page}`);
+				const res = await fetch(`/api/posts?page=${page}`)
 
-				const { data, pages: totalPages } = await res.json();
+				const { data, pages: totalPages } = await res.json()
 
-				setPages(totalPages);
-				setPosts(data);
-				setLoading(false);
+				setPages(totalPages)
+				setPosts(data)
+				setLoading(false)
 			} catch (error) {
-				console.log(error);
-				setLoading(false);
-				setError('Some error occured');
+				console.log(error)
+				setLoading(false)
+				setError('Some error occured')
 			}
-		};
+		}
 
-		fecthPosts();
-	}, [page]);
+		fecthPosts()
+	}, [page])
 
 	return (
 		<div className="app">
@@ -54,7 +54,7 @@ const App = ({ match }) => {
 				</>
 			)}
 		</div>
-	);
-};
+	)
+}
 
-export default App;
+export default App
